@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#102b49">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Elektrikal PRO">
+
+
+<title>ELEKTRIKAL PRO</title>
+<style>
+:root{--navy:#102b49;--navy2:#1d456d;--blue:#eaf2fa;--ink:#152536;--muted:#647487;--line:#dce4ec;--green:#e7f4e8;--greenink:#17612b;--amber:#fff4d6;--red:#fff0ed;--bg:#f3f6fa}
+*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:calc(18px + env(safe-area-inset-top)) 18px 20px;border-radius:0 0 22px 22px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:14px;background:#facc15;color:#102b49;display:grid;place-items:center;font-size:26px;font-weight:900}
+h1{font-size:20px;margin:0;letter-spacing:.5px}header p{font-size:12px;color:#d6e5f4;margin:4px 0 0}
+.status{display:inline-flex;align-items:center;gap:6px;margin-top:15px;padding:6px 10px;border:1px solid #6e8aa6;border-radius:99px;font-size:11px;color:#e7f4ff}
+.dot{width:7px;height:7px;background:#76df91;border-radius:50%}
+main{max-width:680px;margin:0 auto;padding:14px 13px 20px}
+.section-title{font-size:13px;font-weight:800;color:var(--muted);letter-spacing:.6px;margin:8px 3px 10px}
+.menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tile{border:1px solid var(--line);border-radius:16px;background:#fff;padding:14px;text-align:left;min-height:94px;color:var(--ink);box-shadow:0 2px 7px #1736530a}
+.tile:active{transform:scale(.98);background:var(--blue)}.tile .ico{font-size:22px}.tile b{display:block;margin-top:8px;font-size:14px}.tile small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px #17365308}
+.hidden{display:none!important}.back{border:0;background:#e8eef5;color:var(--navy);padding:9px 12px;border-radius:10px;font-weight:700;margin-bottom:12px}
+h2{font-size:19px;color:var(--navy);margin:0 0 5px}.desc{font-size:12px;color:var(--muted);margin:0 0 16px;line-height:1.45}
+label{display:block;font-size:12px;font-weight:750;margin:12px 0 5px}
+input,select{width:100%;height:48px;border:1px solid #cbd6e1;border-radius:11px;padding:0 12px;background:#fff;color:var(--ink);font-size:17px;outline:none}
+input:focus,select:focus{border-color:#3979b6;box-shadow:0 0 0 3px #d9eafa}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.result{background:var(--green);border-radius:13px;padding:14px;margin-top:15px}.result span{font-size:11px;font-weight:800;color:var(--greenink);letter-spacing:.4px}.result strong{display:block;font-size:29px;color:var(--greenink);margin-top:3px;line-height:1.2}
+.formula{background:var(--blue);border-radius:11px;padding:12px;font-size:12px;margin-top:12px;line-height:1.55;overflow-wrap:anywhere}
+.note{background:var(--amber);border:1px solid #f1dfa8;border-radius:11px;padding:12px;font-size:11px;line-height:1.5;margin-top:12px}
+.danger{background:var(--red);border:1px solid #f0c9c1;border-radius:11px;padding:12px;font-size:11px;line-height:1.5;margin-top:12px}
+.primary,.secondary{width:100%;height:46px;border:0;border-radius:11px;font-weight:750;font-size:14px;margin-top:12px}.primary{background:var(--navy);color:#fff}.secondary{background:#eaf0f6;color:var(--navy);border:1px solid var(--line)}
+.top-actions{display:flex;gap:8px}.top-actions button{flex:1}
+.history-item{padding:11px 0;border-bottom:1px solid var(--line);font-size:12px}.history-item:last-child{border:0}
+.history-item b{display:block;color:var(--navy);font-size:13px}.muted{color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:10px;padding:14px 8px}
+@media(min-width:560px){.menu{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand"><div class="logo">⚡</div><div><h1>ELEKTRIKAL PRO</h1><p>Electrical Calculation & Maintenance</p></div></div>
+ <div class="status"><span class="dot"></span><span id="netStatus">Mod luar talian tersedia</span></div>
+</header>
+<main>
+<section id="home">
+ <div class="section-title">KALKULATOR ELEKTRIK</div>
+ <div class="menu">
+  <button class="tile" data-open="neutral"><span class="ico">〽️</span><b>Arus Neutral 3 Fasa</b><small>Anggaran arus neutral asas</small></button>
+  <button class="tile" data-open="single"><span class="ico">🔌</span><b>Beban 1 Fasa</b><small>Arus, kuasa dan PF</small></button>
+  <button class="tile" data-open="three"><span class="ico">⚡</span><b>Beban 3 Fasa</b><small>Arus daripada kW / kVA</small></button>
+  <button class="tile" data-open="drop"><span class="ico">🌡️</span><b>Susut Voltan & Haba</b><small>V = IR dan P = I²R</small></button>
+  <button class="tile" data-open="ne"><span class="ico">🛡️</span><b>Semakan N-E</b><small>Rekod voltan L-N, L-E, N-E</small></button>
+  <button class="tile" data-open="rcd"><span class="ico">🔎</span><b>Arus Baki / RCD</b><small>mA dan sensitiviti nominal</small></button>
+  <button class="tile" data-open="genset"><span class="ico">🔋</span><b>Genset</b><small>kVA dan arus 3 fasa</small></button>
+  <button class="tile" data-open="transformer"><span class="ico">🔁</span><b>Transformer</b><small>Arus berdasarkan kVA</small></button>
+  <button class="tile" data-open="guide"><span class="ico">🧰</span><b>Panduan Troubleshooting</b><small>LV, 11kV, 33kV dan genset</small></button>
+  <button class="tile" data-open="history"><span class="ico">📋</span><b>Sejarah Pengiraan</b><small>Rekod disimpan dalam iPhone</small></button>
+ </div>
+ <div class="card" style="margin-top:14px">
+  <h2>Nota penggunaan</h2>
+  <p class="desc" style="margin:6px 0 0">Pilih modul untuk membuat pengiraan. Nilai input diproses pada peranti ini. Rekod sejarah disimpan secara setempat pada browser/peranti yang digunakan.</p>
+ </div>
+</section>
+
+<section id="tool" class="hidden">
+ <button class="back" id="backHome">‹ Menu utama</button>
+ <div class="card" id="toolContent"></div>
+</section>
+
+
+<section id="guide" class="hidden">
+ <button class="back" id="backGuide">‹ Menu utama</button>
+ <div class="card">
+  <h2>Panduan Troubleshooting</h2>
+  <p class="desc">Panduan pemeriksaan awal. Ikut SOP tapak, permit kerja, LOTO dan arahan orang kompeten. Jangan jadikan panduan ini sebagai kebenaran untuk bekerja pada pepasangan hidup.</p>
+
+  <h3 style="font-size:15px;color:#102b49;margin:18px 0 8px">Sistem LV – MSB / SSB</h3>
+  <details open><summary><b>Arus neutral tinggi</b></summary>
+   <ol><li>Catat arus L1, L2, L3 dan N menggunakan kaedah pengukuran yang diluluskan.</li><li>Semak ketidakseimbangan beban fasa dan agihan litar.</li><li>Jika beban elektronik/SMPS/LED/UPS banyak, minta pemeriksaan harmonik dengan power quality analyser.</li><li>Periksa rekod suhu, keadaan sambungan dan tanda perubahan warna melalui pemeriksaan selamat ketika dinyahbekalkan.</li><li>Jangan longgarkan atau putuskan neutral ketika sistem hidup.</li></ol>
+  </details>
+  <details><summary><b>Terminal neutral panas / berbau hangit</b></summary>
+   <ol><li>Anggap sebagai keadaan berisiko kebakaran; maklumkan penyelia dan ikut prosedur kecemasan tapak.</li><li>Jika selamat dan dibenarkan, kurangkan beban atau nyahbekalkan mengikut switching procedure oleh orang kompeten.</li><li>Selepas disahkan mati, periksa torque mengikut spesifikasi pengilang, kakisan, strand rosak dan kesan arcing.</li><li>Sahkan saiz kabel, rating bar neutral, arus beban dan harmonik sebelum menghidupkan semula.</li></ol>
+  </details>
+  <details><summary><b>Fan capacitor bank tidak berpusing</b></summary>
+   <ol><li>Sahkan status bekalan dan kawalan mengikut lukisan serta prosedur selamat.</li><li>Jika 240 V hanya hadir pada input thermostat, semak contact thermostat, set-point, sensor dan sambungan keluarannya.</li><li>Periksa fius/MCB, terminal, kabel dan motor fan ketika litar diasingkan serta disahkan tiada voltan.</li><li>Uji kapasitor/motor hanya dengan kaedah dan alat yang sesuai; nyahcas kapasitor mengikut prosedur pengilang.</li><li>Jangan bypass thermostat atau interlock sebagai pembaikan kekal.</li></ol>
+  </details>
+
+  <h3 style="font-size:15px;color:#102b49;margin:18px 0 8px">Sistem 11kV / 33kV</h3>
+  <details><summary><b>Trip protection / relay operate</b></summary>
+   <ol><li>Jangan reset atau re-energize berulang kali tanpa mengenal pasti sebab trip.</li><li>Catat relay target, event log, disturbance record, masa trip dan keadaan operasi.</li><li>Semak indikasi SCADA, breaker status, alarm DC supply dan rekod gangguan.</li><li>Serahkan analisis setting, secondary injection, primary test dan pemeriksaan switchgear kepada pasukan HV yang diberi kuasa.</li><li>Ikut switching programme, permit-to-work, proving dead, earthing dan safety rules syarikat.</li></ol>
+  </details>
+  <details><summary><b>Breaker gagal close / trip circuit alarm</b></summary>
+   <ol><li>Semak status mekanikal dan indikasi spring charged / gas / vacuum mengikut jenis breaker.</li><li>Semak DC control supply, fuse/MCB, trip-circuit supervision dan interlock melalui lukisan litar.</li><li>Jangan memintas interlock atau mengendalikan mekanisme HV tanpa kebenaran dan prosedur khusus.</li></ol>
+  </details>
+
+  <h3 style="font-size:15px;color:#102b49;margin:18px 0 8px">Genset</h3>
+  <details><summary><b>Genset gagal start</b></summary>
+   <ol><li>Catat alarm controller dan kod fault sebelum reset.</li><li>Semak status emergency stop, mod AUTO/MANUAL, bateri, charger dan paras bahan api.</li><li>Periksa permissive/interlock, starter circuit dan sensor mengikut manual pengilang.</li><li>Jangan crank berulang kali jika terdapat bunyi mekanikal luar biasa, kebocoran atau alarm kritikal.</li></ol>
+  </details>
+  <details><summary><b>Voltan / frekuensi tidak stabil</b></summary>
+   <ol><li>Catat voltan L-L, L-N, frekuensi dan arus setiap fasa dengan alat yang sesuai.</li><li>Bandingkan beban, PF dan had operasi dengan nameplate genset.</li><li>Semak alarm AVR, governor, fuel system dan keadaan enjin mengikut manual.</li><li>Ujian AVR, governor dan pemeriksaan dalaman dilakukan juruteknik genset kompeten.</li></ol>
+  </details>
+
+  <div class="note"><b>Prinsip penting:</b> Bezakan simptom, bukti pengukuran dan punca sebenar. Rekod bacaan sebelum/selepas pembaikan, masa, lokasi, beban dan alat ukur yang digunakan.</div>
+  <div class="danger"><b>Amaran HV:</b> Kerja 11kV/33kV hanya oleh personel yang diberi kuasa dan kompeten mengikut safety rules, switching programme dan permit kerja. Aplikasi ini bukan prosedur switching atau arahan kerja.</div>
+ </div>
+</section>
+
+<section id="history" class="hidden">
+ <button class="back" id="backHistory">‹ Menu utama</button>
+ <div class="card">
+  <h2>Sejarah Pengiraan</h2><p class="desc">Rekod yang disimpan pada peranti ini sahaja.</p>
+  <div class="top-actions"><button class="secondary" id="exportCsv">Eksport CSV</button><button class="secondary" id="clearHistory">Padam rekod</button></div>
+  <div id="historyList" style="margin-top:12px"></div>
+ </div>
+</section>
+
+<div class="danger"><b>Keselamatan:</b> Aplikasi ini untuk pembelajaran dan anggaran awal. Bukan pengganti reka bentuk, standard, ujian alat atau pengesahan orang kompeten. Jangan buka atau putuskan Neutral/PE ketika sistem hidup. Pengukuran dalam panel hidup hanya oleh orang kompeten dengan PPE, alat ukur sesuai dan prosedur kerja selamat.</div>
+<footer>ELEKTRIKAL PRO • Edisi iPhone Offline • Versi mudah · fail tunggal</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const fmt=x=>Number.isFinite(x)?x.toFixed(2):"—";
+const num=id=>{let v=parseFloat($(id)?.value);return Number.isFinite(v)?v:null};
+let historyData=[];
+try{historyData=JSON.parse(localStorage.getItem('ep_history')||'[]')}catch(e){}
+function saveRecord(title,detail,result){historyData.unshift({date:new Date().toLocaleString('ms-MY'),title,detail,result});historyData=historyData.slice(0,100);localStorage.setItem('ep_history',JSON.stringify(historyData))}
+function field(id,label,value,unit=''){return `<label for="${id}">${label}${unit?' ('+unit+')':''}</label><input id="${id}" type="number" inputmode="decimal" step="any" value="${value}">`}
+function result(label,id,unit){return `<div class="result"><span>${label}</span><strong id="${id}">— ${unit}</strong></div>`}
+function note(text){return `<div class="note">${text}</div>`}
+function renderTool(type){
+ $('home').classList.add('hidden');$('history').classList.add('hidden');$('tool').classList.remove('hidden');
+ const c=$('toolContent');
+ const configs={
+ neutral:{title:'Arus Neutral 3 Fasa',desc:'Anggaran arus neutral daripada arus fasa asas sinusoidal.',body:field('l1','Arus L1',30,'A')+field('l2','Arus L2',20,'A')+field('l3','Arus L3',10,'A')+result('ANGGARAN ARUS NEUTRAL','out','A')+`<div class="formula"><b>Formula:</b> IN = √(I1² + I2² + I3² − I1I2 − I2I3 − I3I1)</div>`+note('Andaian sudut fasa 120° dan arus sinusoidal asas. Tidak mengambil kira harmonik, khususnya harmonik ketiga/triplen yang boleh menaikkan arus neutral.')+`<button class="primary" id="saveCalc">Simpan rekod</button>`,calc:()=>{let a=num('l1'),b=num('l2'),d=num('l3');if([a,b,d].some(x=>x===null||x<0))return null;return Math.sqrt(Math.max(0,a*a+b*b+d*d-a*b-b*d-d*a))},label:'Arus Neutral',detail:()=>`L1=${num('l1')}A; L2=${num('l2')}A; L3=${num('l3')}A`,unit:'A'},
+ single:{title:'Beban 1 Fasa',desc:'Pengiraan arus beban daripada kuasa aktif, voltan dan faktor kuasa.',body:field('p','Kuasa aktif',2400,'W')+field('v','Voltan',240,'V')+field('pf','Power factor',1,'0–1')+result('ARUS BEBAN','out','A')+`<div class="formula"><b>Formula:</b> I = P ÷ (V × PF)</div>`+note('Untuk beban bukan linear, arus sebenar mungkin berbeza. Pastikan PF antara 0 dan 1.')+`<button class="primary" id="saveCalc">Simpan rekod</button>`,calc:()=>{let p=num('p'),v=num('v'),pf=num('pf');return p!==null&&p>=0&&v>0&&pf>0&&pf<=1?p/(v*pf):null},label:'Arus Beban 1 Fasa',detail:()=>`P=${num('p')}W; V=${num('v')}V; PF=${num('pf')}`,unit:'A'},
+ three:{title:'Beban 3 Fasa',desc:'Anggaran arus talian sistem 3 fasa menggunakan voltan talian.',body:field('kw','Kuasa aktif',30,'kW')+field('vll','Voltan L-L',415,'V')+field('pf3','Power factor',0.9,'0–1')+result('ARUS TALIAN','out','A')+`<div class="formula"><b>Formula:</b> I = P ÷ (√3 × VLL × PF)</div>`+note('Kuasa dimasukkan dalam kW dan ditukar kepada W oleh kalkulator. Untuk beban motor, pertimbangkan kecekapan jika kuasa yang diberi ialah kuasa output motor.')+`<button class="primary" id="saveCalc">Simpan rekod</button>`,calc:()=>{let p=num('kw'),v=num('vll'),pf=num('pf3');return p!==null&&p>=0&&v>0&&pf>0&&pf<=1?p*1000/(Math.sqrt(3)*v*pf):null},label:'Arus Beban 3 Fasa',detail:()=>`P=${num('kw')}kW; VLL=${num('vll')}V; PF=${num('pf3')}`,unit:'A'},
+ drop:{title:'Susut Voltan & Haba',desc:'Anggaran susut voltan dan kehilangan kuasa pada rintangan yang dimasukkan.',body:field('i','Arus',40,'A')+field('r','Rintangan',0.05,'Ω')+result('SUSUT VOLTAN','outv','V')+result('KEHILANGAN KUASA','outp','W')+`<div class="formula"><b>Formula:</b> V = I × R<br>P = I² × R</div>`+note('Kehilangan kuasa bukan ramalan suhu kabel atau terminal. Gunakan rintangan yang disahkan dan nilai sebenar pemasangan.')+`<button class="primary" id="saveCalc">Simpan rekod</button>`,calc:()=>{let i=num('i'),r=num('r');return i!==null&&i>=0&&r!==null&&r>=0?{v:i*r,p:i*i*r}:null},label:'Susut Voltan & Haba',detail:()=>`I=${num('i')}A; R=${num('r')}Ω`,unit:'W'},
+ ne:{title:'Semakan Voltan N-E',desc:'Rekod bacaan voltan fasa-neutral, fasa-earth dan neutral-earth.',body:field('ln','Voltan L-N',240,'V')+field('le','Voltan L-E',240,'V')+field('ne','Voltan N-E',2,'V')+`<label for="loc">Lokasi pemeriksaan</label><input id="loc" type="text" value="MSB incoming">`+result('VOLTan N-E DIREKODKAN','out','V')+note('Bacaan N-E perlu ditafsir mengikut sistem pembumian, beban, impedans neutral dan titik pengukuran. Bacaan N-E sahaja tidak menentukan lulus atau gagal.')+`<button class="primary" id="saveCalc">Simpan rekod</button>`,calc:()=>{let x=num('ne');return x!==null&&x>=0?x:null},label:'Bacaan N-E',detail:()=>`L-N=${num('ln')}V; L-E=${num('le')}V; N-E=${num('ne')}V; Lokasi=${$('loc').value}`,unit:'V'},
+ rcd:{title:'Arus Baki / RCD',desc:'Tukar arus baki diukur daripada A kepada mA dan bandingkan dengan sensitiviti nominal.',body:field('leak','Arus baki diukur',0.02,'A')+field('sens','Sensitiviti RCD',30,'mA')+result('ARUS BAKI','out','mA')+`<div id="rcdCompare" class="formula"></div>`+note('Ini perbandingan bacaan sahaja, bukan pengesahan operasi RCD. Gunakan RCD tester yang sesuai untuk menguji arus dan masa trip.')+`<button class="primary" id="saveCalc">Simpan rekod</button>`,calc:()=>{let x=num('leak');return x!==null&&x>=0?x*1000:null},label:'Arus Baki',detail:()=>`IΔ=${num('leak')}A; sensitiviti=${num('sens')}mA`,unit:'mA'},
+ genset:{title:'Pengiraan Genset 3 Fasa',desc:'Anggaran arus penuh berdasarkan kapasiti genset dalam kVA.',body:field('kva','Kapasiti genset',100,'kVA')+field('gv','Voltan L-L',415,'V')+result('ARUS PENUH ANGGARAN','out','A')+`<div class="formula"><b>Formula:</b> I = kVA × 1000 ÷ (√3 × VLL)</div>`+note('Ini arus berdasarkan kapasiti kVA pada voltan yang dimasukkan. Semak nameplate, faktor kuasa, rating alternator dan spesifikasi pengilang.')+`<button class="primary" id="saveCalc">Simpan rekod</button>`,calc:()=>{let k=num('kva'),v=num('gv');return k!==null&&k>=0&&v>0?k*1000/(Math.sqrt(3)*v):null},label:'Arus Genset',detail:()=>`Kapasiti=${num('kva')}kVA; VLL=${num('gv')}V`,unit:'A'},
+ transformer:{title:'Pengiraan Transformer 3 Fasa',desc:'Anggaran arus penuh transformer daripada kapasiti kVA.',body:field('tkva','Kapasiti transformer',500,'kVA')+field('tv','Voltan L-L',415,'V')+result('ARUS PENUH ANGGARAN','out','A')+`<div class="formula"><b>Formula:</b> I = kVA × 1000 ÷ (√3 × VLL)</div>`+note('Masukkan voltan sisi yang hendak dikira: LV atau HV. Gunakan nilai nameplate dan reka bentuk perlindungan yang berkaitan.')+`<button class="primary" id="saveCalc">Simpan rekod</button>`,calc:()=>{let k=num('tkva'),v=num('tv');return k!==null&&k>=0&&v>0?k*1000/(Math.sqrt(3)*v):null},label:'Arus Transformer',detail:()=>`Kapasiti=${num('tkva')}kVA; VLL=${num('tv')}V`,unit:'A'}
+ };
+ const cfg=configs[type];c.innerHTML=`<h2>${cfg.title}</h2><p class="desc">${cfg.desc}</p>${cfg.body}`;
+ function update(){let x=cfg.calc();if(type==='drop'){ $('outv').textContent=x!==null?fmt(x.v)+' V':'— V';$('outp').textContent=x!==null?fmt(x.p)+' W':'— W'}else{$('out').textContent=x===null?'Input tidak sah':fmt(x)+' '+cfg.unit}
+ if(type==='rcd'&&x!==null){let s=num('sens');$('rcdCompare').textContent=s>0?(x>=s?'Bacaan sama atau melebihi nilai sensitiviti nominal.':'Bacaan di bawah sensitiviti nominal.'):'Masukkan sensitiviti RCD yang sah.'}
+ }
+ c.querySelectorAll('input').forEach(el=>el.addEventListener('input',update));update();
+ $('saveCalc').addEventListener('click',()=>{let x=cfg.calc();if(x===null){alert('Sila semak input.');return}let val=type==='drop'?`Susut ${fmt(x.v)}V; kehilangan ${fmt(x.p)}W`:fmt(x)+' '+cfg.unit;saveRecord(cfg.label,cfg.detail(),val);alert('Rekod disimpan pada peranti ini.');});
+}
+function showGuide(){ $('home').classList.add('hidden');$('tool').classList.add('hidden');$('history').classList.add('hidden');$('guide').classList.remove('hidden') }
+function showHistory(){ $('home').classList.add('hidden');$('tool').classList.add('hidden');$('history').classList.remove('hidden');let list=$('historyList');list.innerHTML=historyData.length?historyData.map(x=>`<div class="history-item"><b>${esc(x.title)} — ${esc(x.result)}</b><span class="muted">${esc(x.date)}</span><div>${esc(x.detail)}</div></div>`).join(''):'<p class="muted">Belum ada rekod disimpan.</p>'}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>b.dataset.open==='history'?showHistory():b.dataset.open==='guide'?showGuide():renderTool(b.dataset.open)));
+$('backGuide').onclick=()=>{$('guide').classList.add('hidden');$('home').classList.remove('hidden')};
+$('backHome').onclick=()=>{$('tool').classList.add('hidden');$('home').classList.remove('hidden')};
+$('backHistory').onclick=()=>{$('history').classList.add('hidden');$('home').classList.remove('hidden')};
+$('clearHistory').onclick=()=>{if(confirm('Padam semua rekod pengiraan pada peranti ini?')){historyData=[];localStorage.removeItem('ep_history');showHistory()}};
+$('exportCsv').onclick=()=>{let rows=[['Tarikh','Modul','Butiran','Keputusan'],...historyData.map(x=>[x.date,x.title,x.detail,x.result])];let csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');let blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='rekod_elektrikal_pro.csv';a.click();URL.revokeObjectURL(a.href)};
+function net(){ $('netStatus').textContent=navigator.onLine?'Sedia digunakan • Offline tersedia':'Anda sedang offline';}
+window.addEventListener('online',net);window.addEventListener('offline',net);net();
+</script>
+</body></html>
