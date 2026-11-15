@@ -148,7 +148,7 @@ function renderTool(type){
  transformer:{title:'Pengiraan Transformer 3 Fasa',desc:'Anggaran arus penuh transformer daripada kapasiti kVA.',body:field('tkva','Kapasiti transformer',500,'kVA')+field('tv','Voltan L-L',415,'V')+result('ARUS PENUH ANGGARAN','out','A')+`<div class="formula"><b>Formula:</b> I = kVA × 1000 ÷ (√3 × VLL)</div>`+note('Masukkan voltan sisi yang hendak dikira: LV atau HV. Gunakan nilai nameplate dan reka bentuk perlindungan yang berkaitan.')+`<button class="primary" id="saveCalc">Simpan rekod</button>`,calc:()=>{let k=num('tkva'),v=num('tv');return k!==null&&k>=0&&v>0?k*1000/(Math.sqrt(3)*v):null},label:'Arus Transformer',detail:()=>`Kapasiti=${num('tkva')}kVA; VLL=${num('tv')}V`,unit:'A'}
  };
  const cfg=configs[type];c.innerHTML=`<h2>${cfg.title}</h2><p class="desc">${cfg.desc}</p>${cfg.body}`;
- function update(){let x=cfg.calc();if(type==='drop'){ $('outv').textContent=x?fmt(x.v)+' V':'— V';$('outp').textContent=x?fmt(x.p)+' W':'— W'}else{$('out').textContent=x===null?'Input tidak sah':fmt(x)+' '+cfg.unit}
+ function update(){let x=cfg.calc();if(type==='drop'){ $('outv').textContent=x!==null?fmt(x.v)+' V':'— V';$('outp').textContent=x!==null?fmt(x.p)+' W':'— W'}else{$('out').textContent=x===null?'Input tidak sah':fmt(x)+' '+cfg.unit}
  if(type==='rcd'&&x!==null){let s=num('sens');$('rcdCompare').textContent=s>0?(x>=s?'Bacaan sama atau melebihi nilai sensitiviti nominal.':'Bacaan di bawah sensitiviti nominal.'):'Masukkan sensitiviti RCD yang sah.'}
  }
  c.querySelectorAll('input').forEach(el=>el.addEventListener('input',update));update();
@@ -165,6 +165,5 @@ $('clearHistory').onclick=()=>{if(confirm('Padam semua rekod pengiraan pada pera
 $('exportCsv').onclick=()=>{let rows=[['Tarikh','Modul','Butiran','Keputusan'],...historyData.map(x=>[x.date,x.title,x.detail,x.result])];let csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');let blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='rekod_elektrikal_pro.csv';a.click();URL.revokeObjectURL(a.href)};
 function net(){ $('netStatus').textContent=navigator.onLine?'Sedia digunakan • Offline tersedia':'Anda sedang offline';}
 window.addEventListener('online',net);window.addEventListener('offline',net);net();
-))}
 </script>
 </body></html>
